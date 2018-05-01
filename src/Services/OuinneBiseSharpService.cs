@@ -2,12 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
     using Enums;
     using Exceptions;
     using Extensions;
     using Models;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Newtonsoft.Json.Serialization;
     using Refit;
 
     public class OuinneBiseSharpService
@@ -25,6 +29,12 @@
             _companyId = companyId;
             _year = year;
             _apiService = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url);
+
+            JsonConvert.DefaultSettings =
+                () => new JsonSerializerSettings()
+                {
+                    Culture = new System.Globalization.CultureInfo("") { NumberFormat = { NumberDecimalSeparator = "," } }
+                };
         }
 
         /// <summary>
@@ -72,7 +82,6 @@
             var parameters = new object[] { cMethod.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock }.AsEnumerable().Where(p => p != null).ToArray();
 
             return await RequestAsync<Response<decimal>>(new BaseRequest(parameters));
-
         }
 
         /// <summary>
@@ -92,7 +101,34 @@
             var parameters = new object[] { method.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock }.AsEnumerable().Where(p => p != null).ToArray();
 
             return await RequestAsync<Response<int>>(new BaseRequest(parameters));
+        }
 
+        /// <summary>
+        /// This method returns a piece of information from a given commercial document.
+        /// </summary>
+        /// <param name="method">Piece of information to be returned. The possible values for cInfo are in <see cref="DocInfoMethodsEnum"/></param>
+        /// <param name="dEndDate">The transactions are selected up to the date specified. The parameter is optional.
+        /// If the parameter is missing all the transactions are selected.</param>
+        /// <param name="dStartDate">The transactions are selected starting from the date specified. The parameter is optional.
+        /// If the parameter is missing all the transactions are selected</param>
+        /// <param name="nComplement">Parameter that can be coupled with some of the cMethod parameter.
+        /// Parameter that can be coupled with some of the cMethod parameter.
+        /// <para /> If cMethod = vente chiffre affaire paiement méthode then it can contain the ID of the payment method of the documents (do_ban_pay).
+        /// <para /> If cMethod = vente chiffre affaire paiement type then it can contain the ID of the type of the payment method of the documents (bq_type).
+        /// <para /> If cMethod = vente chiffre affaire categorie then it can contain the ID of the category of the documents (do_catego).
+        /// <para /> If cMethod = achat montant total categorie then it must contain the ID of the category of the documents (do_catego).</param>
+        /// <param name="cComplement">Parameter that can be coupled with some of the cMethod parameter.
+        /// <para /> If cMethod = vente chiffre affaire groupe article then it can contain the items group on which a filter has to be applied.
+        /// <para /> If cMethod = vente marge groupe then it can contain the items group on which a filter has to be applied.
+        /// <para /> If cMethod = achat montant total groupe article then it can contain the items group on which a filter has to be applied.</param>
+        /// <returns></returns>
+        public async Task<Response<decimal>> DocInfo(DocInfoMethodsEnum method, DateTime dEndDate, DateTime dStartDate, int? nComplement = null, string cComplement = null)
+        {
+            var parameters = new object[] { method.ToDescriptionString(), dEndDate.ToOuinneBiseString(), dStartDate.ToOuinneBiseString(), nComplement, cComplement }.AsEnumerable().Where(p => p != null).ToArray();
+
+            var res = await RequestAsync<Response<decimal>>(new BaseRequest(parameters));
+
+            return res;
         }
 
         /// <summary>
