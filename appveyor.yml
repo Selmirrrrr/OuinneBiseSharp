@@ -21,4 +21,4 @@ deploy:
     secure: xfvf8mYfM/WhwIgrec9Ls9XntziINAuvA16H5NQbUa4TkCCaa5iHV0r4vwE5W2QH
   on:
     branch: master
-  artifact: /.*\.symbols\.nupkg/
+  artifact: *.nupkg
