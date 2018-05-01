@@ -20,7 +20,7 @@ namespace Bizy.OuinneBiseSharp.Tests
                 Environment.GetEnvironmentVariable("WINBIZ_API_PASSWORD"),
                 "BgIAAACkAABSU0ExAAQAAAEAAQBZ3myd6ZQA0tUXZ3gIzu1sQ7larRfM5KFiYbkgWk+jw2VEWpxpNNfDw8M3MIIbbDeUG02y/ZW+XFqyMA/87kiGt9eqd9Q2q3rRgl3nWoVfDnRAPR4oENfdXiq5oLW3VmSKtcBl2KzBCi/J6bbaKmtoLlnvYMfDWzkE3O1mZrouzA==",
                 "https://api.winbizcloud.ch/");
-            _service = new OuinneBiseSharpService(settings, "BizyBoard", 2, 2018, new Logger<OuinneBiseSharpService>(new LoggerFactory()));
+            _service = new OuinneBiseSharpService(settings, "BizyBoard", 2, 2018);
         }
 
         [Fact]
