@@ -71,6 +71,14 @@ namespace Bizy.OuinneBiseSharp.Tests
         }
 
         [Fact]
+        public async Task DocInfo_VenteChiffreAffaire_ReturnsValue()
+        {
+            var response = await _service.DocInfo(DocInfoMethodsEnum.VenteChiffreAffaire, new DateTime(DateTime.Now.Year, 1, 31), new DateTime(DateTime.Now.Year, 1, 1)).ConfigureAwait(false);
+
+            Assert.True(response.Value == 528404M);
+        }
+
+        [Fact]
         public async Task Folders_ReturnsValue()
         {
             try
