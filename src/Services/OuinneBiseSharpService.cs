@@ -27,10 +27,21 @@
             _apiService = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url);
         }
 
-        public async Task<Response<int>> Stock(int nItem, DateTime? dDateEnd = null, DateTime? dDateStart = null, int? nWarehouse = null, DateTime? dExpiryEnd = null, DateTime? dExpiryStart = null)
+        /// <summary>
+        /// This method returns a piece of information about the stock quantities of an item.
+        /// </summary>
+        /// <param name="cMethod">Piece of information to be returned. The possible values for cInfo are in <see cref="StockMethodsEnum"/></param>
+        /// <param name="nItem">Item ID (ar_numero).</param>
+        /// <param name="dDateEnd">The transactions up to this date are selected. This parameter is not mandatory. If the parameter is not specified, all the transactions are considered.</param>
+        /// <param name="dDateStart">The transactions starting from this date are selected. This parameter is not mandatory. If the parameter is not specified, all the transactions are considered.</param>
+        /// <param name="nWarehouse">Warehouse ID. If this parameter is specified, only the transactions for this warehouse are selected. Otherwise all the transactions are considered.</param>
+        /// <param name="dExpiryEnd">Only the transactions concerning line items with an expiry date before the date of the parameters are considered. If the parameter is not specified all the transactions are considered.</param>
+        /// <param name="dExpiryStart">Only the transactions concerning line items with an expiry date before the date of the parameters are considered. If the parameter is not specified all the transactions are considered.</param>
+        /// <returns></returns>
+        public async Task<Response<int>> Stock(StockMethodsEnum cMethod, int nItem, DateTime? dDateEnd = null, DateTime? dDateStart = null, int? nWarehouse = null, DateTime? dExpiryEnd = null, DateTime? dExpiryStart = null)
         {
             var parameters = new object[]
-                    {"disponible", nItem, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), nWarehouse?.ToString(), dExpiryEnd?.ToOuinneBiseString(), dExpiryStart?.ToOuinneBiseString()}
+                    {cMethod.ToDescriptionString(), nItem, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), nWarehouse?.ToString(), dExpiryEnd?.ToOuinneBiseString(), dExpiryStart?.ToOuinneBiseString()}
                 .AsEnumerable()
                 .Where(p => p != null).ToArray();
 
@@ -47,7 +58,7 @@
         /// <summary>
         /// This method can return various information related to an address.
         /// </summary>
-        /// <param name="method">Piece of information to be returned. The possible values for cInfo are in <see cref="AdInfoMethodsEnum"/></param>
+        /// <param name="cMethod">Piece of information to be returned. The possible values for cInfo are in <see cref="AdInfoMethodsEnum"/></param>
         /// <param name="nAdresse">Only the transactions concerning the addresses with ad_numero = nAdresse are considered.</param>
         /// <param name="dDateEnd">The transactions are selected up to the date specified. The parameter is optional.
         /// If the parameter is missing all the transactions are selected.</param>
@@ -56,9 +67,9 @@
         /// <param name="vStock">This parameter is used only if cInfo is customersalesitem or supplierpurchasesitem.
         /// If the type of vStock is a string, the cInfo is applied to the Items being in the group specified in vStock.</param>
         /// <returns></returns>
-        public async Task<Response<decimal>> AdInfo(AdInfoMethodsEnum method, int nAdresse, DateTime? dDateEnd = null, DateTime? dDateStart = null, string vStock = null)
+        public async Task<Response<decimal>> AdInfo(AdInfoMethodsEnum cMethod, int nAdresse, DateTime? dDateEnd = null, DateTime? dDateStart = null, string vStock = null)
         {
-            var parameters = new object[] { method.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock }.AsEnumerable().Where(p => p != null).ToArray();
+            var parameters = new object[] { cMethod.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock }.AsEnumerable().Where(p => p != null).ToArray();
 
             return await RequestAsync<Response<decimal>>(new BaseRequest(parameters));
 
@@ -84,6 +95,12 @@
 
         }
 
+        /// <summary>
+        /// This method returns the folders list.
+        /// The Headers "winbiz-companyid" and "winbiz-year" are compulsory, but can be left empty when this method is used.
+        /// The method can be used as an alternative way to prompt the user with a list of folders / fiscal year that replaces the need to enter manually this values at the logon.
+        /// </summary>
+        /// <returns>Returns the complete list of the folders that are available in the user's Winbiz Cloud, no matter the content of the "winbiz-companyid" and "winbiz-year" headers.</returns>
         public async Task<Response<List<Dossier>>> Folders() => await RequestAsync<Response<List<Dossier>>>(new BaseRequest());
 
         public async Task<T> RequestAsync<T>(BaseRequest request) where T : IBaseResponse

@@ -25,7 +25,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         [Fact]
         public async Task GetStock_ReturnsStock_WhenProductExists()
         {
-            var response = await _service.Stock(108).ConfigureAwait(false);
+            var response = await _service.Stock(StockMethodsEnum.Available, 108).ConfigureAwait(false);
 
             Assert.True(response.Value == 100);
         }
