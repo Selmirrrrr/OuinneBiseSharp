@@ -4,7 +4,6 @@ namespace Bizy.OuinneBiseSharp.Tests
     using System.Linq;
     using System.Threading.Tasks;
     using Enums;
-    using Microsoft.Extensions.Logging;
     using Services;
     using Xunit;
 

@@ -4,9 +4,8 @@
 
     internal class OuinneBiseSharpException : Exception
     {
-        public OuinneBiseSharpException(string message, Exception e) : base(message, e)
+        public OuinneBiseSharpException(string message, Exception ex) : base(message, ex)
         {
-            
         }
     }
 }

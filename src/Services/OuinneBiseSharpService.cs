@@ -16,7 +16,7 @@
         private readonly string _appName;
         private readonly int _companyId;
         private readonly int _year;
-        private readonly IOuinneBiseSharp _api;
+        private readonly IOuinneBiseSharp _apiService;
 
         public OuinneBiseSharpService(OuinneBiseApiSettings ouinneBiseApiSettings, string appName, int companyId, int year)
         {
@@ -24,7 +24,7 @@
             _appName = appName;
             _companyId = companyId;
             _year = year;
-            _api = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url);
+            _apiService = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url);
         }
 
         public async Task<Response<int>> Stock(int nItem, DateTime? dDateEnd = null, DateTime? dDateStart = null, int? nWarehouse = null, DateTime? dExpiryEnd = null, DateTime? dExpiryStart = null)
@@ -90,7 +90,7 @@
         {
             try
             {
-                var result = await _api.Req<T>(request,
+                var result = await _apiService.Req<T>(request,
                                                 _ouinneBiseApiSettings.Company,
                                                 _ouinneBiseApiSettings.Username,
                                                 _ouinneBiseApiSettings.Password.Encrypt(_ouinneBiseApiSettings.EncryptionKey),
