@@ -1,6 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.0.1</Version>
+    <Authors>Selmir Hajruli</Authors>
+    <Company>BizyDev</Company>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/BizyDev/OuinneBiseSharp/master/licence</PackageLicenseUrl>
+    <PackageProjectUrl>https://bizy.ch</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BizyDev/OuinneBiseSharp</RepositoryUrl>
+    <Description>.NET Standard 2.0 library to access WinBIZ Cloud API</Description>
   </PropertyGroup>
 
   <ItemGroup>
