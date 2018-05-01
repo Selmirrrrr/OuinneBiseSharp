@@ -5,27 +5,25 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Enums;
+    using Exceptions;
     using Extensions;
-    using Microsoft.Extensions.Logging;
     using Models;
     using Refit;
 
     public class OuinneBiseSharpService
     {
-        public readonly OuinneBiseApiSettings OuinneBiseApiSettings;
+        private readonly OuinneBiseApiSettings _ouinneBiseApiSettings;
         private readonly string _appName;
         private readonly int _companyId;
         private readonly int _year;
-        private readonly ILogger<OuinneBiseSharpService> _logger;
         private readonly IOuinneBiseSharp _api;
 
-        public OuinneBiseSharpService(OuinneBiseApiSettings ouinneBiseApiSettings, string appName, int companyId, int year, ILogger<OuinneBiseSharpService> logger)
+        public OuinneBiseSharpService(OuinneBiseApiSettings ouinneBiseApiSettings, string appName, int companyId, int year)
         {
-            OuinneBiseApiSettings = ouinneBiseApiSettings;
+            _ouinneBiseApiSettings = ouinneBiseApiSettings;
             _appName = appName;
             _companyId = companyId;
             _year = year;
-            _logger = logger;
             _api = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url);
         }
 
@@ -93,10 +91,10 @@
             try
             {
                 var result = await _api.Req<T>(request,
-                                                OuinneBiseApiSettings.Company,
-                                                OuinneBiseApiSettings.Username,
-                                                OuinneBiseApiSettings.Password.Encrypt(OuinneBiseApiSettings.EncryptionKey),
-                                                _companyId, _year, OuinneBiseApiSettings.Key).ConfigureAwait(false);
+                                                _ouinneBiseApiSettings.Company,
+                                                _ouinneBiseApiSettings.Username,
+                                                _ouinneBiseApiSettings.Password.Encrypt(_ouinneBiseApiSettings.EncryptionKey),
+                                                _companyId, _year, _ouinneBiseApiSettings.Key).ConfigureAwait(false);
 
                 switch (result.ErrorLast ?? 0)
                 {
@@ -224,8 +222,7 @@
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "La requête a échoué", request);
-                return default(T);
+                throw new OuinneBiseSharpException("La requête a échoué", e);
             }
         }
     }
