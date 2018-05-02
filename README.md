@@ -8,6 +8,7 @@
 .NET Standard 2.0 library to access WinBIZ Cloud API.
 
 Thanks to [AppVeyor](https://www.appveyor.com/) for providing free continuous integration for open-source projects.
+
 [build-badge]: https://img.shields.io/appveyor/ci/bizy/ouinnebisesharp.svg?maxAge=3600?logo=appveyor
 [build-status]: https://ci.appveyor.com/project/Bizy/ouinnebisesharp
 
