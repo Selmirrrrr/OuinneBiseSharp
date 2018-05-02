@@ -3,32 +3,32 @@
     public enum DocumentTypesEnum
     {
         /// <summary>
-        /// Debtor starting balance
+        ///     Debtor starting balance
         /// </summary>
         DebtorStartingBalance = 17,
 
         /// <summary>
-        /// Debtor invoice
+        ///     Debtor invoice
         /// </summary>
         DebtorInvoice = 20,
 
         /// <summary>
-        /// Credit note
+        ///     Credit note
         /// </summary>
         CreditNote = 22,
 
         /// <summary>
-        /// Creditor starting balance
+        ///     Creditor starting balance
         /// </summary>
         CreditorStartingBalance = 43,
 
         /// <summary>
-        /// Creditor invoice
+        ///     Creditor invoice
         /// </summary>
         CreditorInvoice = 44,
 
         /// <summary>
-        /// Creditor credit note
+        ///     Creditor credit note
         /// </summary>
         CreditorCreditNote = 47
     }

@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using Xunit;
     using Extensions;
+    using Xunit;
 
     public class DateTimeExtensionsTests
     {

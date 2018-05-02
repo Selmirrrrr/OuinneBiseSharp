@@ -6,13 +6,13 @@
 
     public class EnumExtensionsTests
     {
-        enum WithDescriptionEnum
+        private enum WithDescriptionEnum
         {
             [Description("test")]
             Test
         }
 
-        enum WithoutDescriptionEnum
+        private enum WithoutDescriptionEnum
         {
             Test
         }

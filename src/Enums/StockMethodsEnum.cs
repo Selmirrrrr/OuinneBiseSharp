@@ -5,55 +5,55 @@
     public enum StockMethodsEnum
     {
         /// <summary>
-        /// Stock physically available
+        ///     Stock physically available
         /// </summary>
         [Description("available")]
         Available,
 
         /// <summary>
-        /// On suppliers orders or in production
+        ///     On suppliers orders or in production
         /// </summary>
         [Description("suppliersorders")]
         SuppliersOrders,
 
         /// <summary>
-        /// On customers orders confirmations (reserved)
+        ///     On customers orders confirmations (reserved)
         /// </summary>
         [Description("customersorders")]
         CustomersOrders,
 
         /// <summary>
-        /// Delivered to customers (delivery slips
+        ///     Delivered to customers (delivery slips
         /// </summary>
         [Description("customersdeliveries")]
         CustomersDeliveries,
 
         /// <summary>
-        /// On customers worksheets
+        ///     On customers worksheets
         /// </summary>
         [Description("customersworksheets")]
         CustomersWorksheets,
 
         /// <summary>
-        /// Total sales amount
+        ///     Total sales amount
         /// </summary>
         [Description("salesamount")]
         SalesAmount,
 
         /// <summary>
-        /// total quantity sold;
+        ///     total quantity sold;
         /// </summary>
         [Description("salesquantity")]
         SalesQuantity,
 
         /// <summary>
-        /// total quantity returned (debtors credit notes)
+        ///     total quantity returned (debtors credit notes)
         /// </summary>
         [Description("salesquantityreturned")]
         SalesQuantityReturned,
 
         /// <summary>
-        /// date of the last sale
+        ///     date of the last sale
         /// </summary>
         [Description("saleslastdate")]
         SalesLastDate
