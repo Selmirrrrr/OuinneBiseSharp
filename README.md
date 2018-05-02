@@ -1,6 +1,6 @@
 # OuinneBizSharp
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/Bizy/ouinnebisesharp?branch=master&retina=true)](https://ci.appveyor.com/project/Bizy/ouinnebisesharp)
+[![Build status](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/project/Bizy/ouinnebisesharp)
 
 .NET Standard 2.0 library to access WinBIZ Cloud API.
 
