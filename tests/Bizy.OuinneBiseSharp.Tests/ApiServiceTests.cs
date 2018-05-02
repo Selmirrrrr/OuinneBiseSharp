@@ -23,9 +23,9 @@ namespace Bizy.OuinneBiseSharp.Tests
         }
 
         [Fact]
-        public async Task GetStock_ReturnsStock_WhenProductExists()
+        public async Task Stock_ReturnsStock_WhenProductExists()
         {
-            var response = await _service.Stock(108).ConfigureAwait(false);
+            var response = await _service.Stock(StockMethodsEnum.Available, 108).ConfigureAwait(false);
 
             Assert.True(response.Value == 100);
         }
@@ -43,7 +43,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.AdInfo(AdInfoMethodsEnum.CustomerBalance, 18).ConfigureAwait(false);
 
-            Assert.True(response.Value == 240565);
+            Assert.True(response.Value == 2405.65M);
         }
 
         [Fact]
@@ -67,22 +67,22 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.AdInfo(AdInfoMethodsEnum.CustomerSalesItem, 18, vStock: "SERVICES").ConfigureAwait(false);
 
-            Assert.True(response.Value == 021509M);
+            Assert.True(response.Value == 2150.9M);
+        }
+
+        [Fact]
+        public async Task DocInfo_VenteChiffreAffaire_ReturnsValue()
+        {
+            var response = await _service.DocInfo(DocInfoMethodsEnum.VenteChiffreAffaire, new DateTime(DateTime.Now.Year, 1, 31), new DateTime(DateTime.Now.Year, 1, 1)).ConfigureAwait(false);
+
+            Assert.True(response.Value == 5284.04M);
         }
 
         [Fact]
         public async Task Folders_ReturnsValue()
         {
-            try
-            {
-                var folders = await _service.Folders();
-                Assert.True(folders.Value.Count > 1);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            var folders = await _service.Folders();
+            Assert.True(folders.Value.Count > 1);
         }
     }
 }
