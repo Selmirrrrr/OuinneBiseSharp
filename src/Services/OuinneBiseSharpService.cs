@@ -136,7 +136,7 @@
         /// </returns>
         public async Task<Response<List<Address>>> Addresses(DateTime? dDateSince = null)
         {
-            var parameters = new object[] {dDateSince?.ToOuinneBiseString()};
+            var parameters = new object[] { dDateSince?.ToOuinneBiseString() };
 
             return await RequestAsync<Response<List<Address>>>(new BaseRequest(parameters));
         }
@@ -164,7 +164,7 @@
         /// <returns></returns>
         public async Task<Response<decimal>> AdInfo(AdInfoMethodsEnum cMethod, int nAdresse, DateTime? dDateEnd = null, DateTime? dDateStart = null, string vStock = null)
         {
-            var parameters = new object[] {cMethod.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock};
+            var parameters = new object[] { cMethod.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock };
 
             return await RequestAsync<Response<decimal>>(new BaseRequest(parameters));
         }
@@ -192,7 +192,7 @@
         /// <returns></returns>
         public async Task<Response<int>> AdInfo(AdInfoMethodsEnum method, int nAdresse, int vStock, DateTime? dDateEnd = null, DateTime? dDateStart = null)
         {
-            var parameters = new object[] {method.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock};
+            var parameters = new object[] { method.ToDescriptionString(), nAdresse, dDateEnd?.ToOuinneBiseString(), dDateStart?.ToOuinneBiseString(), vStock };
 
             return await RequestAsync<Response<int>>(new BaseRequest(parameters));
         }
@@ -242,7 +242,7 @@
         /// <returns></returns>
         public async Task<Response<decimal>> DocInfo(DocInfoMethodsEnum method, DateTime dEndDate, DateTime dStartDate, int? nComplement = null, string cComplement = null)
         {
-            var parameters = new object[] {method.ToDescriptionString(), dEndDate.ToOuinneBiseString(), dStartDate.ToOuinneBiseString(), nComplement, cComplement};
+            var parameters = new object[] { method.ToDescriptionString(), dEndDate.ToOuinneBiseString(), dStartDate.ToOuinneBiseString(), nComplement, cComplement };
 
             return await RequestAsync<Response<decimal>>(new BaseRequest(parameters));
         }
@@ -275,11 +275,11 @@
         ///     Remark: The method will also always return the payments that have a delay bigger than the bigger delay specified in
         ///     the parameters
         /// </returns>
-        public async Task<Response<object>> PendingPayments(int nFirstIntervalLimit, int? nSecondIntervalLimit = null, int? nThirdIntervalLimit = null)
+        public async Task<Response<List<PendingPayments>>> PendingPayments(int nFirstIntervalLimit, int? nSecondIntervalLimit = null, int? nThirdIntervalLimit = null)
         {
-            var parameters = new object[] {nFirstIntervalLimit, nSecondIntervalLimit, nThirdIntervalLimit};
+            var parameters = new object[] { nFirstIntervalLimit, nSecondIntervalLimit, nThirdIntervalLimit };
 
-            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+            return await RequestAsync<Response<List<PendingPayments>>>(new BaseRequest(parameters));
         }
 
         /// <summary>
@@ -299,11 +299,11 @@
         ///     included.
         /// </param>
         /// <returns>All pending payments for the intervals</returns>
-        public async Task<Response<object>> AddressesPendingPayments(int nDelayTo, int? nDelayFrom = null)
+        public async Task<Response<List<AddressesPendingPayments>>> AddressesPendingPayments(int nDelayTo, int? nDelayFrom = null)
         {
-            var parameters = new object[] {nDelayTo, nDelayFrom};
+            var parameters = new object[] { nDelayTo, nDelayFrom };
 
-            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+            return await RequestAsync<Response<List<AddressesPendingPayments>>>(new BaseRequest(parameters));
         }
 
         /// <summary>
@@ -321,11 +321,11 @@
         ///     limit.
         /// </param>
         /// <returns></returns>
-        public async Task<Response<object>> AddressPendingPayments(int nAddressId, int nFirstIntervalLimit, int? nSecondIntervalLimit = null)
+        public async Task<Response<List<AddressPendingPayments>>> AddressPendingPayments(int nAddressId, int nFirstIntervalLimit, int? nSecondIntervalLimit = null)
         {
-            var parameters = new object[] {nAddressId, nFirstIntervalLimit, nSecondIntervalLimit};
+            var parameters = new object[] { nAddressId, nFirstIntervalLimit, nSecondIntervalLimit };
 
-            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+            return await RequestAsync<Response<List<AddressPendingPayments>>>(new BaseRequest(parameters));
         }
 
         /// <summary>
@@ -356,9 +356,9 @@
         /// </remarks>
         public async Task<Response<object>> PaymentsCalendar(int nFirstDueRange, int? nSecondDueRange = null, int? nThirdDueRange = null)
         {
-            var parameters = new object[] {nFirstDueRange, nSecondDueRange, nThirdDueRange};
+            var parameters = new object[] { nFirstDueRange, nSecondDueRange, nThirdDueRange };
 
-            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -373,9 +373,9 @@
         /// <returns></returns>
         public async Task<Response<object>> AddressesPaymentsCalendar(int nDueTo, int? nDueFrom = null)
         {
-            var parameters = new object[] {nDueTo, nDueFrom};
+            var parameters = new object[] { nDueTo, nDueFrom };
 
-            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -392,11 +392,11 @@
         ///     due date greater than today + nSecondDueRange.
         /// </param>
         /// <returns></returns>
-        public async Task<Response<object>> AddressPaymentsCalendar(int nAddressId, int nFirstDueRange, int? nSecondDueRange = null)
+        public async Task<string> AddressPaymentsCalendar(int nAddressId, int nFirstDueRange, int? nSecondDueRange = null)
         {
-            var parameters = new object[] {nAddressId, nFirstDueRange, nSecondDueRange};
+            var parameters = new object[] { nAddressId, nFirstDueRange, nSecondDueRange };
 
-            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+            throw new NotImplementedException();
         }
 
         /// <summary>

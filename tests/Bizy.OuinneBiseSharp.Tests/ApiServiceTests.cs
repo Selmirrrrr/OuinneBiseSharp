@@ -12,12 +12,12 @@ namespace Bizy.OuinneBiseSharp.Tests
         public ApiServiceTests()
         {
             _service = new OuinneBiseSharpService(Environment.GetEnvironmentVariable("WINBIZ_API_COMPANY"), Environment.GetEnvironmentVariable("WINBIZ_API_USERNAME"),
-                Environment.GetEnvironmentVariable("WINBIZ_API_PASSWORD"), _winBizCompanyId, _winBizYear, Environment.GetEnvironmentVariable("WINBIZ_API_KEY"), "BizyBoard");
+                Environment.GetEnvironmentVariable("WINBIZ_API_PASSWORD"), WinBizCompanyId, WinBizYear, Environment.GetEnvironmentVariable("WINBIZ_API_KEY"), "BizyBoard");
         }
 
         private readonly OuinneBiseSharpService _service;
-        private readonly int _winBizCompanyId = 2;
-        private readonly int _winBizYear = 2018;
+        private const int WinBizCompanyId = 2;
+        private const int WinBizYear = 2018;
 
         [Fact]
         public async Task AdInfo_CustomerBalanceMethod_ReturnsValue()
@@ -80,6 +80,36 @@ namespace Bizy.OuinneBiseSharp.Tests
             var response = await _service.Stock(StockMethodsEnum.Available, 108).ConfigureAwait(false);
 
             Assert.True(response.Value == 100);
+        }
+
+        [Fact]
+        public async Task AddressPaymentsCalendar()
+        {
+            var response = await _service.AddressPaymentsCalendar(18, 0, 1);
+        }
+
+        [Fact]
+        public async Task PendingPayments_ReturnsPendingPayaments()
+        {
+            var response = await _service.PendingPayments(30);
+
+            Assert.True(response.Value.Any());
+        }
+
+        [Fact]
+        public async Task AddressesPendingPayments_ReturnsPendingPayamentsByAddresses()
+        {
+            var response = await _service.AddressesPendingPayments(30);
+
+            Assert.True(response.Value.Any());
+        }
+
+        [Fact]
+        public async Task AddressPendingPayments_ReturnsPendingPayamentsForAnAddresses()
+        {
+            var response = await _service.AddressPendingPayments(18, 30);
+
+            Assert.True(response.Value.Any());
         }
     }
 }
