@@ -4,6 +4,8 @@ namespace Bizy.OuinneBiseSharp.Tests
     using System.Linq;
     using System.Threading.Tasks;
     using Enums;
+    using Models;
+    using Newtonsoft.Json;
     using Services;
     using Xunit;
 
@@ -76,6 +78,15 @@ namespace Bizy.OuinneBiseSharp.Tests
             var response = await _service.DocInfo(DocInfoMethodsEnum.VenteChiffreAffaire, new DateTime(DateTime.Now.Year, 1, 31), new DateTime(DateTime.Now.Year, 1, 1)).ConfigureAwait(false);
 
             Assert.True(response.Value == 528404M);
+        }
+
+        [Theory]
+        [InlineData("{\"ErrorsCount\":0,\"ErrorLast\":\"\",\"ErrorsMsg\":\"\",\"Value\":\"5284,04\"}")]
+        [InlineData("{\"ErrorsCount\":0,\"ErrorLast\":\"\",\"ErrorsMsg\":\"\",\"Value\":\"5284.04\"}")]
+        public void TestJson(string json)
+        {
+            var res = JsonConvert.DeserializeObject<Response<decimal>>(json);
+            Assert.True(res.Value == 5284.04M);
         }
 
         [Fact]
