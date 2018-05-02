@@ -170,7 +170,22 @@
             return await RequestAsync<Response<object>>(new BaseRequest(parameters));
         }
 
-            return res;
+        /// <summary>
+        /// This method returns the number of the open (unpaid) documents along with the open (unpaid) amount in the local currency.
+        /// The results are grouped by address of the document, document type and payment delay.
+        /// </summary>
+        /// <param name="nDelayTo">This parameter allows to specify the maximal delay of the payments included in the results.
+        /// The delay is calculated from the due date. If documents with multiple due dates exist, each due date is taken into consideration.</param>
+        /// <param name="nDelayFrom">This parameter allows to specify the minimal delay of the payments included in the results. 
+        /// <para /> If the parameter is omitted, all the documents with a delay smaller than the one specified in nDelayTo will be included.</param>
+        /// <returns>All pending payments for the intervals</returns>
+        public async Task<Response<object>> AddressesPendingPayments(int nDelayTo, int? nDelayFrom = null)
+        {
+            var parameters = new object[] { nDelayTo, nDelayFrom }.AsEnumerable().Where(p => p != null).ToArray();
+
+            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+        }
+
         }
 
         /// <summary>
