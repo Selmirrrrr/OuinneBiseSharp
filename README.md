@@ -4,6 +4,7 @@
 [![Tests status][tests-badge]][tests-status]
 [![Downloads status][downloads-badge]][downloads-status]
 [![Version status][version-badge]][version-status]
+[![Download][download-badge]][download-link]
 
 .NET Standard 2.0 library to access WinBIZ Cloud API.
 
@@ -20,3 +21,6 @@ Thanks to [AppVeyor](https://www.appveyor.com/) for providing free continuous in
 
 [version-badge]: https://img.shields.io/nuget/v/Bizy.OuinneBiseSharp.svg?maxAge=3600
 [version-status]: https://www.nuget.org/packages/Bizy.OuinneBiseSharp/
+
+[download-badge]: https://img.shields.io/badge/NuGet-Download-blue.svg
+[download-link]: https://www.nuget.org/packages/Bizy.OuinneBiseSharp
