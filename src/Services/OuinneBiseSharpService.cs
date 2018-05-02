@@ -14,26 +14,40 @@
 
     public class OuinneBiseSharpService
     {
-        private readonly OuinneBiseApiSettings _ouinneBiseApiSettings;
+        private readonly string _winBizCompanyName;
+        private readonly string _winBizUsername;
+        private readonly string _winBizPassword;
+        private readonly int _winBizCompanyId;
+        private readonly int _winBizYear;
+        private readonly string _winBizKey;
         private readonly string _appName;
-        private readonly int _companyId;
-        private readonly int _year;
+        private readonly string _winBizEncryptionKey;
         private readonly IOuinneBiseSharp _apiService;
 
         /// <summary>
         /// OuinneBiseSharpService constructor
         /// </summary>
-        /// <param name="ouinneBiseApiSettings"><see cref="OuinneBiseApiSettings"/></param>
-        /// <param name="appName">Name of your final application, will be displayed in error messages.</param>
-        /// <param name="companyId">User's company ID</param>
-        /// <param name="year">Selected fiscal year</param>
-        public OuinneBiseSharpService(OuinneBiseApiSettings ouinneBiseApiSettings, string appName, int companyId, int year)
+        /// <param name="winBizCompanyName">The name of the Company for which the Cloud subscription has been opened. The application must prompt the user for his Company Name.</param>
+        /// <param name="winBizUsername">The username of the Cloud user. The username is chosen by the user when he subscribes to the service. The application must prompt the user for his username</param>
+        /// <param name="winBizPassword">The password of the Cloud user. The password is chosen by the user when he subscribes to the service. The application must prompt the user for the password. The password must by encrypted.</param>
+        /// <param name="winBizCompanyId">The WinBIZ Folder Number. See this article if you dont know where to find the winbiz-companyid. The list of available companies can be obtained via the method <see cref="Folders"/></param>
+        /// <param name="winBizYear">The fiscal year of the WinBIZ Folder specified in winbiz-companyid. The list of available fiscal years can be obtained via the method Folders.</param>
+        /// <param name="winBizKey">The security key obtained from LOGICIAL SA.</param>
+        /// <param name="appName">Your app name, will be displayed in error messages.</param>
+        /// <param name="winBizApiUrl">WinBiz Cloud API endpoint URL, defaults to https://api.winbizcloud.ch</param>
+        /// <param name="winBizEncryptionKey">WinBiz Cloud API encryption key, see WB docs to get this value.</param>
+        public OuinneBiseSharpService(string winBizCompanyName, string winBizUsername, string winBizPassword, int winBizCompanyId, int winBizYear, string winBizKey, string appName, string winBizApiUrl = "https://api.winbizcloud.ch/", 
+            string winBizEncryptionKey = "BgIAAACkAABSU0ExAAQAAAEAAQBZ3myd6ZQA0tUXZ3gIzu1sQ7larRfM5KFiYbkgWk+jw2VEWpxpNNfDw8M3MIIbbDeUG02y/ZW+XFqyMA/87kiGt9eqd9Q2q3rRgl3nWoVfDnRAPR4oENfdXiq5oLW3VmSKtcBl2KzBCi/J6bbaKmtoLlnvYMfDWzkE3O1mZrouzA==")
         {
-            _ouinneBiseApiSettings = ouinneBiseApiSettings;
+            _winBizCompanyName = winBizCompanyName;
+            _winBizUsername = winBizUsername;
+            _winBizPassword = winBizPassword.Encrypt(_winBizEncryptionKey);
+            _winBizCompanyId = winBizCompanyId;
+            _winBizYear = winBizYear;
+            _winBizKey = winBizKey;
             _appName = appName;
-            _companyId = companyId;
-            _year = year;
-            _apiService = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url, new RefitSettings
+            _winBizEncryptionKey = winBizEncryptionKey;
+            _apiService = RestService.For<IOuinneBiseSharp>(winBizApiUrl, new RefitSettings
             {
                 JsonSerializerSettings = new JsonSerializerSettings
                 {
@@ -261,11 +275,7 @@
         {
             try
             {
-                var result = await _apiService.Req<T>(request,
-                                                _ouinneBiseApiSettings.Company,
-                                                _ouinneBiseApiSettings.Username,
-                                                _ouinneBiseApiSettings.Password.Encrypt(_ouinneBiseApiSettings.EncryptionKey),
-                                                _companyId, _year, _ouinneBiseApiSettings.Key).ConfigureAwait(false);
+                var result = await _apiService.Req<T>(request, _winBizCompanyName, _winBizUsername, _winBizPassword, _winBizCompanyId, _winBizYear, _winBizKey).ConfigureAwait(false);
 
                 switch (result.ErrorLast ?? 0)
                 {
