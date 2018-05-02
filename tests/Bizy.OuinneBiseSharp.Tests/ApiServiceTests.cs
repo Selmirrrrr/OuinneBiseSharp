@@ -83,12 +83,6 @@ namespace Bizy.OuinneBiseSharp.Tests
         }
 
         [Fact]
-        public async Task AddressPaymentsCalendar()
-        {
-            var response = await _service.AddressPaymentsCalendar(18, 0, 1);
-        }
-
-        [Fact]
         public async Task PendingPayments_ReturnsPendingPayaments()
         {
             var response = await _service.PendingPayments(30);
