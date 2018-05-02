@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using Xunit;
     using Extensions;
 
@@ -22,32 +21,6 @@
         public void ToOuinneBiseString_ShouldFormatDateCorrectly(DateTime date, string expected)
         {
             Assert.Equal(expected, date.ToOuinneBiseString());
-        }
-    }
-
-    public class EnumExtensionsTests
-    {
-        enum WithDescriptionEnum
-        {
-            [Description("test")]
-            Test
-        }
-
-        enum WithoutDescriptionEnum
-        {
-            Test
-        }
-
-        [Fact]
-        public void ToDescriptionString_ShouldReturnDescription_WhenExisitng()
-        {
-            Assert.Equal("test", WithDescriptionEnum.Test.ToDescriptionString());
-        }
-
-        [Fact]
-        public void ToDescriptionString_ShouldReturnEmptyString_WhenTheresNoDesc()
-        {
-            Assert.True(string.IsNullOrWhiteSpace(WithoutDescriptionEnum.Test.ToDescriptionString()));
         }
     }
 }
