@@ -186,6 +186,67 @@
             return await RequestAsync<Response<object>>(new BaseRequest(parameters));
         }
 
+        /// <summary>
+        /// This method returns the detail of all open documents for a given address for a specific delay interval.
+        /// </summary>
+        /// <param name="nAddressId">Id of the address</param>
+        /// <param name="nFirstIntervalLimit">First limit to set up the delay interval. The method returns all open documents with a delay up to this interval limit.</param>
+        /// <param name="nSecondIntervalLimit">Second limit to set up the delay interval. The method returns all open documents with a delay greater than this interval limit.
+        /// If nFirstIntervalLimit is set, the delay interval will be all open documents between the second and the first limit.</param>
+        /// <returns></returns>
+        public async Task<Response<object>> AddressPendingPayments(int nAddressId, int nFirstIntervalLimit, int? nSecondIntervalLimit = null)
+        {
+            var parameters = new object[] { nAddressId, nFirstIntervalLimit, nSecondIntervalLimit }.AsEnumerable().Where(p => p != null).ToArray();
+
+            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+        }
+
+        /// <summary>
+        /// This method returns the number of the due documents along with due amount in the local currency.
+        /// The results grouped by document type and payment due date. Up to three different ranges can be passed as a parameter to filter the documents.
+        /// </summary>
+        /// <param name="nFirstDueRange">This parameter allows to specify a first range to filter on the due date.
+        /// The method will return the documents for which the payments are due in the days between today and today + nFrstDueRange.
+        /// If documents with multiple due dates exist, each due date is taken into consideration separetely.</param>
+        /// <param name="nSecondDueRange">This parameter allows to specify a second range to filter on the due date.
+        /// The range taken into consideration is the one between nFirstDueTerm+1 and the number of days passed as parameter here.
+        /// All the documents with a due date comprised in that range will be grouped together.</param>
+        /// <param name="nThirdDueRange">Third range of to filter on the due date.
+        /// The method returns all the due documents with a due date between the second and third due range, and all the open documents with a due date greater than today + nThirdDue Range.</param>
+        /// <remarks>The method will also always return the payments that have a due date bigger than the bigger due term specified in the parameters.</remarks>
+        public async Task<Response<object>> PaymentsCalendar(int nFirstDueRange, int? nSecondDueRange = null, int? nThirdDueRange = null)
+        {
+            var parameters = new object[] { nFirstDueRange, nSecondDueRange, nThirdDueRange }.AsEnumerable().Where(p => p != null).ToArray();
+
+            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+        }
+
+        /// <summary>
+        /// This method returns the number of the due documents along with the due amount in the local currency. The results are grouped by address of the document, document type and payment due date.
+        /// </summary>
+        /// <param name="nDueTo">The documents with a due date between today and today + nDueTo will be insluded in the results.
+        /// If documents with multiple due dates exist, each due date is taken into consideration separately.</param>
+        /// <param name="nDueFrom">The documents with a due date greater than today + nDueFrom will be included in the results.</param>
+        /// <returns></returns>
+        public async Task<Response<object>> AddressesPaymentsCalendar(int nDueTo, int? nDueFrom = null)
+        {
+            var parameters = new object[] { nDueTo, nDueFrom }.AsEnumerable().Where(p => p != null).ToArray();
+
+            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+        }
+
+        /// <summary>
+        /// This method returns the detail of all open documents for a given address for due date that is comprised in a given range of days.
+        /// </summary>
+        /// <param name="nAddressId">Id of the address</param>
+        /// <param name="nFirstDueRange">First limit to set up the due date range. The method returns all open documents with due date up to today + nFirstDueRange.</param>
+        /// <param name="nSecondDueRange">Second limit to set up the due date range. The method returns all open documents with a due date greater than today + nSecondDueRange.</param>
+        /// <returns></returns>
+        public async Task<Response<object>> AddressPaymentsCalendar(int nAddressId, int nFirstDueRange, int? nSecondDueRange = null)
+        {
+            var parameters = new object[] { nAddressId, nFirstDueRange, nSecondDueRange }.AsEnumerable().Where(p => p != null).ToArray();
+
+            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
         }
 
         /// <summary>
