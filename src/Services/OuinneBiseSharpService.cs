@@ -28,13 +28,19 @@
             _appName = appName;
             _companyId = companyId;
             _year = year;
-            _apiService = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url);
-
-            JsonConvert.DefaultSettings =
-                () => new JsonSerializerSettings()
+            _apiService = RestService.For<IOuinneBiseSharp>(ouinneBiseApiSettings.Url, new RefitSettings
+            {
+                JsonSerializerSettings = new JsonSerializerSettings
                 {
-                    Culture = new System.Globalization.CultureInfo("") { NumberFormat = { NumberDecimalSeparator = "," } }
-                };
+                    Culture = new CultureInfo("fr-CH")
+                    {
+                        NumberFormat = new NumberFormatInfo
+                        {
+                            NumberDecimalSeparator = ","
+                        }
+                    }
+                }
+            });
         }
 
         /// <summary>
