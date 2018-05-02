@@ -10,8 +10,6 @@
     using Extensions;
     using Models;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using Newtonsoft.Json.Serialization;
     using Refit;
 
     public class OuinneBiseSharpService
@@ -22,6 +20,13 @@
         private readonly int _year;
         private readonly IOuinneBiseSharp _apiService;
 
+        /// <summary>
+        /// OuinneBiseSharpService constructor
+        /// </summary>
+        /// <param name="ouinneBiseApiSettings"><see cref="OuinneBiseApiSettings"/></param>
+        /// <param name="appName">Name of your final application, will be displayed in error messages.</param>
+        /// <param name="companyId">User's company ID</param>
+        /// <param name="year">Selected fiscal year</param>
         public OuinneBiseSharpService(OuinneBiseApiSettings ouinneBiseApiSettings, string appName, int companyId, int year)
         {
             _ouinneBiseApiSettings = ouinneBiseApiSettings;
@@ -64,6 +69,16 @@
             return await RequestAsync<Response<int>>(new BaseRequest(parameters));
         }
 
+        /// <summary>
+        /// This method returns the address list.
+        /// </summary>
+        /// <param name="dDateSince">Allows you to obtain the addresses modified since that date.</param>
+        /// <returns>
+        /// <para /> - the Internal ID of the address (ad_numero)
+        /// <para /> - the Manual Code of the address (ad_code)
+        /// <para /> - the Name of the Address (ad_societe)
+        /// <para /> - the operation performed since the date passed as parameter (operation)
+        /// </returns>
         public async Task<Response<List<Address>>> Addresses(DateTime? dDateSince = null)
         {
             var parameters = new object[] { dDateSince?.ToOuinneBiseString() }.AsEnumerable().Where(p => p != null).ToArray();
@@ -145,7 +160,7 @@
         /// <returns>Returns the complete list of the folders that are available in the user's Winbiz Cloud, no matter the content of the "winbiz-companyid" and "winbiz-year" headers.</returns>
         public async Task<Response<List<Dossier>>> Folders() => await RequestAsync<Response<List<Dossier>>>(new BaseRequest());
 
-        public async Task<T> RequestAsync<T>(BaseRequest request) where T : IBaseResponse
+        private async Task<T> RequestAsync<T>(BaseRequest request) where T : IBaseResponse
         {
             try
             {
