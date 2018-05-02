@@ -21,7 +21,6 @@
         private readonly int _winBizYear;
         private readonly string _winBizKey;
         private readonly string _appName;
-        private readonly string _winBizEncryptionKey;
         private readonly IOuinneBiseSharp _apiService;
 
         /// <summary>
@@ -41,12 +40,11 @@
         {
             _winBizCompanyName = winBizCompanyName;
             _winBizUsername = winBizUsername;
-            _winBizPassword = winBizPassword.Encrypt(_winBizEncryptionKey);
+            _winBizPassword = winBizPassword.Encrypt(winBizEncryptionKey);
             _winBizCompanyId = winBizCompanyId;
             _winBizYear = winBizYear;
             _winBizKey = winBizKey;
             _appName = appName;
-            _winBizEncryptionKey = winBizEncryptionKey;
             _apiService = RestService.For<IOuinneBiseSharp>(winBizApiUrl, new RefitSettings
             {
                 JsonSerializerSettings = new JsonSerializerSettings
