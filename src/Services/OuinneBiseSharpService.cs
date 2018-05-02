@@ -147,7 +147,28 @@
         {
             var parameters = new object[] { method.ToDescriptionString(), dEndDate.ToOuinneBiseString(), dStartDate.ToOuinneBiseString(), nComplement, cComplement }.AsEnumerable().Where(p => p != null).ToArray();
 
-            var res = await RequestAsync<Response<decimal>>(new BaseRequest(parameters));
+            return await RequestAsync<Response<decimal>>(new BaseRequest(parameters));
+        }
+
+        /// <summary>
+        /// This method returns the number of the open (unpaid) documents along with the open (unpaid) amount in the local currency.
+        /// The results grouped by document type and payment delay. Up to three different delays can be passed as a parameter.
+        /// </summary>
+        /// <param name="nFirstIntervalLimit">This parameter allows to specify a first group of late payments.
+        /// The method will return the documents for which the payments are late, up to the number of days specified in the parameter.
+        /// The delay is calculated from the due date. If documents with multiple due dates exist, each due date is taken into consideration.</param>
+        /// <param name="nSecondIntervalLimit">This parameter allows to specify a first group of late payments.
+        /// The interval taken into consideration is the one between nFirstIntervalLimit+1 and the number of days passed as parameter here.</param>
+        /// <param name="nThirdIntervalLimit">Third limit to set up the delay intervals.
+        /// The method returns all open documents with a delay between the second and third interval limit, and all open documents with a delay greater than this interval limit.</param>
+        /// <returns> Return all pending payments for the intervals
+        /// <para /> Remark: The method will also always return the payments that have a delay bigger than the bigger delay specified in the parameters</returns>
+        public async Task<Response<object>> PendingPayments(int nFirstIntervalLimit, int? nSecondIntervalLimit = null, int? nThirdIntervalLimit = null)
+        {
+            var parameters = new object[] { nFirstIntervalLimit, nSecondIntervalLimit, nThirdIntervalLimit }.AsEnumerable().Where(p => p != null).ToArray();
+
+            return await RequestAsync<Response<object>>(new BaseRequest(parameters));
+        }
 
             return res;
         }
