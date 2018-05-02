@@ -282,6 +282,32 @@
                         result.ErrorLevel = ErrorLevelEnum.Developer;
                         result.UserErrorMsg = $"An error occurred in the application {_appName}";
                         break;
+                    case 111:
+                    case 134:
+                    case 197:
+                    case 250:
+                    case 280:
+                    //case 297:
+                    case 299:
+                    case 327:
+                    case 420:
+                    //case 514:
+                    case 535:
+                    case 666:
+                    case 667:
+                    case 668:
+                    case 672:
+                    case 673:
+                    case 689:
+                    case 717:
+                    case 737:
+                    case 837:
+                    case 864:
+                    case 905:
+                    case 999:
+                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
+                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
+                        break;
                     case 193:
                         result.ErrorLevel = ErrorLevelEnum.Customer;
                         result.UserErrorMsg = "Some of the following login details are missing: Name of the Company, ID of the Folder, Fiscal Year";
@@ -302,98 +328,13 @@
                         result.ErrorLevel = ErrorLevelEnum.Customer;
                         result.UserErrorMsg = "The company selected by the user can't be found.";
                         break;
-                    case 111:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = $"An error occurred in the application {_appName}";
-                        break;
-                    //case 134:
-                    case 197:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 250:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 280:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    //case 297:
-                    case 299:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 327:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 420:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    //case 514:
-                    case 535:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 666:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 667:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 668:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 672:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 673:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 689:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 717:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 737:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 837:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 864:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 905:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    case 999:
-                        result.ErrorLevel = ErrorLevelEnum.WinBiz;
-                        result.UserErrorMsg = "An error occurred in WinBIZ Cloud";
-                        break;
-                    default:
-                        break;
                 }
 
                 return result;
             }
             catch (Exception e)
             {
-                throw new OuinneBiseSharpException("La requête a échoué", e);
+                throw new OuinneBiseSharpException("Bad request.", e);
             }
         }
     }
