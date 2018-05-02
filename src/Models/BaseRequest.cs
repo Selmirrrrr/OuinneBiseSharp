@@ -1,5 +1,6 @@
 ﻿namespace Bizy.OuinneBiseSharp.Models
 {
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using Newtonsoft.Json;
 
@@ -14,7 +15,7 @@
         public BaseRequest(object[] parameters = null, [CallerMemberName] string method = null)
         {
             Method = method;
-            Parameters = parameters;
+            Parameters = parameters.AsEnumerable().Where(p => p != null).ToArray();
         }
     }
 }
