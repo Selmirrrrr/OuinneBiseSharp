@@ -5,7 +5,7 @@
 [![Downloads status][downloads-badge]][downloads-status]
 [![Version status][version-badge]][version-status]
 [![Download][download-badge]][download-link]
-
+[![CodeFactor](https://www.codefactor.io/repository/github/bizydev/ouinnebisesharp/badge)](https://www.codefactor.io/repository/github/bizydev/ouinnebisesharp)     
 .NET Standard 2.0 library to access WinBIZ Cloud API. Be aware, not all WinBIZ Cloud API methods are implemented yet.
 
 # Getting Started
