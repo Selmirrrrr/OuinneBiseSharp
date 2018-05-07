@@ -112,7 +112,6 @@
         [Description("supplierpurchaseitem")]
         SupplierPurchaseItem,
 
-
         /// <summary>
         ///     total number of purchases
         /// </summary>
