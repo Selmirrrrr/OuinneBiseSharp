@@ -49,15 +49,12 @@
         /// <param name="winBizKey">The security key obtained from LOGICIAL SA.</param>
         /// <param name="appName">Your app name, will be displayed in error messages.</param>
         /// <param name="winBizApiUrl">WinBiz Cloud API endpoint URL, defaults to https://api.winbizcloud.ch</param>
-        /// <param name="winBizEncryptionKey">WinBiz Cloud API encryption key, see WB docs to get this value.</param>
         public OuinneBiseSharpService(string winBizCompanyName, string winBizUsername, string winBizPassword, int winBizCompanyId, int winBizYear, string winBizKey, string appName,
-            string winBizApiUrl = "https://api.winbizcloud.ch/",
-            string winBizEncryptionKey =
-                "BgIAAACkAABSU0ExAAQAAAEAAQBZ3myd6ZQA0tUXZ3gIzu1sQ7larRfM5KFiYbkgWk+jw2VEWpxpNNfDw8M3MIIbbDeUG02y/ZW+XFqyMA/87kiGt9eqd9Q2q3rRgl3nWoVfDnRAPR4oENfdXiq5oLW3VmSKtcBl2KzBCi/J6bbaKmtoLlnvYMfDWzkE3O1mZrouzA==")
+            string winBizApiUrl = "https://api.winbizcloud.ch/")
         {
             _winBizCompanyName = winBizCompanyName;
             _winBizUsername = winBizUsername;
-            _winBizPassword = winBizPassword.Encrypt(winBizEncryptionKey);
+            _winBizPassword = winBizPassword.Encrypt();
             _winBizCompanyId = winBizCompanyId;
             _winBizYear = winBizYear;
             _winBizKey = winBizKey;
