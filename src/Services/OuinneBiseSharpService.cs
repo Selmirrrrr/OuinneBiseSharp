@@ -54,7 +54,7 @@
         {
             _winBizCompanyName = winBizCompanyName;
             _winBizUsername = winBizUsername;
-            _winBizPassword = winBizPassword.Encrypt();
+            _winBizPassword = winBizPassword;
             _winBizCompanyId = winBizCompanyId;
             _winBizYear = winBizYear;
             _winBizKey = winBizKey;
