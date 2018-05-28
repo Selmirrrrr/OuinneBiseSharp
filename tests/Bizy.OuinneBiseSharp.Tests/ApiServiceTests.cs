@@ -72,7 +72,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         public async Task Folders_ReturnsValue()
         {
             var tempService = new OuinneBiseSharpService(Environment.GetEnvironmentVariable("WINBIZ_API_COMPANY"), Environment.GetEnvironmentVariable("WINBIZ_API_USERNAME"),
-                Environment.GetEnvironmentVariable("WINBIZ_API_PASSWORD"), 0, 0, Environment.GetEnvironmentVariable("WINBIZ_API_KEY"), "BizyBoard");
+                Environment.GetEnvironmentVariable("WINBIZ_API_PASSWORD").Encrypt(), 0, 0, Environment.GetEnvironmentVariable("WINBIZ_API_KEY"), "BizyBoard");
             var folders = await tempService.Folders();
             Assert.True(folders.Value.Count > 1);
         }
