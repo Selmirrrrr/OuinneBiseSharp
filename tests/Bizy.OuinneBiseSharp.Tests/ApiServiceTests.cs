@@ -4,6 +4,7 @@ namespace Bizy.OuinneBiseSharp.Tests
     using System.Linq;
     using System.Threading.Tasks;
     using Enums;
+    using Extensions;
     using Services;
     using Xunit;
 
@@ -12,7 +13,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         public ApiServiceTests()
         {
             _service = new OuinneBiseSharpService(Environment.GetEnvironmentVariable("WINBIZ_API_COMPANY"), Environment.GetEnvironmentVariable("WINBIZ_API_USERNAME"),
-                Environment.GetEnvironmentVariable("WINBIZ_API_PASSWORD"), WinBizCompanyId, WinBizYear, Environment.GetEnvironmentVariable("WINBIZ_API_KEY"), "BizyBoard");
+                Environment.GetEnvironmentVariable("WINBIZ_API_PASSWORD").Encrypt(), WinBizCompanyId, WinBizYear, Environment.GetEnvironmentVariable("WINBIZ_API_KEY"), "BizyBoard");
         }
 
         private readonly OuinneBiseSharpService _service;
