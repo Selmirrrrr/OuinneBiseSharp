@@ -351,11 +351,11 @@
         ///     The method will also always return the payments that have a due date bigger than the bigger due term specified
         ///     in the parameters.
         /// </remarks>
-        public async Task<Response<object>> PaymentsCalendar(int nFirstDueRange, int? nSecondDueRange = null, int? nThirdDueRange = null)
+        public async Task<Response<List<PendingPayments>>> PaymentsCalendar(int nFirstDueRange, int? nSecondDueRange = null, int? nThirdDueRange = null)
         {
             var parameters = new object[] { nFirstDueRange, nSecondDueRange, nThirdDueRange };
 
-            throw new NotImplementedException();
+            return await RequestAsync<Response<List<PendingPayments>>>(new BaseRequest(parameters));
         }
 
         /// <summary>
@@ -368,11 +368,11 @@
         /// </param>
         /// <param name="nDueFrom">The documents with a due date greater than today + nDueFrom will be included in the results.</param>
         /// <returns></returns>
-        public async Task<Response<object>> AddressesPaymentsCalendar(int nDueTo, int? nDueFrom = null)
+        public async Task<Response<List<AddressesPaymentsCalendar>>> AddressesPaymentsCalendar(int nDueTo, int? nDueFrom = null)
         {
             var parameters = new object[] { nDueTo, nDueFrom };
 
-            throw new NotImplementedException();
+            return await RequestAsync<Response<List<AddressesPaymentsCalendar>>>(new BaseRequest(parameters));
         }
 
         /// <summary>
@@ -389,11 +389,11 @@
         ///     due date greater than today + nSecondDueRange.
         /// </param>
         /// <returns></returns>
-        public async Task<string> AddressPaymentsCalendar(int nAddressId, int nFirstDueRange, int? nSecondDueRange = null)
+        public async Task<Response<List<AddressPaymentsCalendar>>> AddressPaymentsCalendar(int nAddressId, int nFirstDueRange, int? nSecondDueRange = null)
         {
             var parameters = new object[] { nAddressId, nFirstDueRange, nSecondDueRange };
 
-            throw new NotImplementedException();
+            return await RequestAsync<Response<List<AddressPaymentsCalendar>>>(new BaseRequest(parameters));
         }
 
         /// <summary>
