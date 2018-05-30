@@ -49,8 +49,9 @@
         /// <param name="winBizKey">The security key obtained from LOGICIAL SA.</param>
         /// <param name="appName">Your app name, will be displayed in error messages.</param>
         /// <param name="winBizApiUrl">WinBiz Cloud API endpoint URL, defaults to https://api.winbizcloud.ch</param>
+        /// <param name="settings"></param>
         public OuinneBiseSharpService(string winBizCompanyName, string winBizUsername, string winBizPassword, int winBizCompanyId, int winBizYear, string winBizKey, string appName,
-            string winBizApiUrl = "https://api.winbizcloud.ch/")
+            string winBizApiUrl = "https://api.winbizcloud.ch/", JsonSerializerSettings settings = null)
         {
             _winBizCompanyName = winBizCompanyName;
             _winBizUsername = winBizUsername;
@@ -61,13 +62,13 @@
             _appName = appName;
             _apiService = RestService.For<IOuinneBiseSharp>(winBizApiUrl, new RefitSettings
             {
-                JsonSerializerSettings = new JsonSerializerSettings
+                JsonSerializerSettings = settings ?? new JsonSerializerSettings
                 {
                     Culture = new CultureInfo("fr-CH")
                     {
                         NumberFormat = new NumberFormatInfo
                         {
-                            NumberDecimalSeparator = ","
+                            NumberDecimalSeparator = "."
                         }
                     }
                 }
