@@ -25,7 +25,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.AdInfo(AdInfoMethodsEnum.CustomerBalance, 18).ConfigureAwait(false);
 
-            Assert.True(response.Value == 2405.65M);
+            Assert.True(response.ErrorsCount == 0);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.AdInfo(AdInfoMethodsEnum.CustomerInvoicesOpen, 18).ConfigureAwait(false);
 
-            Assert.True(response.Value == 4);
+            Assert.True(response.ErrorsCount == 0);
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.AdInfo(AdInfoMethodsEnum.CustomerSalesItem, 18, vStock: "SERVICES").ConfigureAwait(false);
 
-            Assert.True(response.Value == 2150.9M);
+            Assert.True(response.ErrorsCount == 0);
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.AdInfo(AdInfoMethodsEnum.SalesCount, 18).ConfigureAwait(false);
 
-            Assert.True(response.Value == 4);
+            Assert.True(response.ErrorsCount == 0);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.DocInfo(DocInfoMethodsEnum.VenteChiffreAffaire, new DateTime(DateTime.Now.Year, 1, 31), new DateTime(DateTime.Now.Year, 1, 1)).ConfigureAwait(false);
 
-            Assert.True(response.Value == 5284.04M);
+            Assert.True(response.ErrorsCount == 0);
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace Bizy.OuinneBiseSharp.Tests
         {
             var response = await _service.Stock(StockMethodsEnum.Available, 108).ConfigureAwait(false);
 
-            Assert.True(response.Value == 100);
+            Assert.True(response.ErrorsCount == 0);
         }
 
         [Fact]
