@@ -106,5 +106,19 @@ namespace Bizy.OuinneBiseSharp.Tests
             var response = await _service.AddressPendingPayments(18, 30);
             Assert.True(response.ErrorsCount == 0);
         }
+
+        [Fact]
+        public async Task PaymentsCalendar_ReturnsDuePayments()
+        {
+            var response = await _service.PaymentsCalendar(9999);
+            Assert.True(response.ErrorsCount == 0);
+        }
+
+        [Fact]
+        public async Task AddressesPaymentsCalendar_ReturnsPendingCalendarByAddresses()
+        {
+            var response = await _service.AddressesPendingPayments(9999);
+            Assert.True(response.ErrorsCount == 0);
+        }
     }
 }
