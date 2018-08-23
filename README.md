@@ -1,4 +1,4 @@
-# OuinneBiseSharp
+# OuinneBiseSharp - Project on hold
 
 [![Build status][build-badge]][build-status]
 [![Tests status][tests-badge]][tests-status]
